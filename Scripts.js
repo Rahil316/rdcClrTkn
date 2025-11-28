@@ -463,12 +463,11 @@ function displayColorTokens(collection) {
   container.classList.add("color-system-updating");
   const fragment = document.createDocumentFragment();
 
-  if (collection.errors)
-    fragment.appendChild(createErrorSection(collection.errors));
+  if (collection.errors) fragment.appendChild(createDebugSection(collection));
+  fragment.appendChild(createErrorSection(collection.errors));
   fragment.appendChild(createRawSection(collection.raw));
   fragment.appendChild(createThemeSection(collection.con, "light"));
   fragment.appendChild(createThemeSection(collection.con, "dark"));
-  fragment.appendChild(createDebugSection(collection));
 
   container.innerHTML = "";
   container.appendChild(fragment);
@@ -622,9 +621,9 @@ function createDebugSection(collection) {
       <p><strong>Critical errors:</strong> ${errors.critical?.length || 0}</p>
       <p><strong>Warnings:</strong> ${errors.warnings?.length || 0}</p>
     </div>
-    <button class="debug-btn" id="logSummary">Log Summary to Console</button>
-    <button id="exportCss" style="padding:10px 20px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">Export CSS</button>
-    <button id="downloadCsv" style="padding:10px 20px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">Export CSV</button>
+    <button id="exportCss" class="prBtn">Export CSS</button>
+    <button id="downloadCsv" class="prBtn">Export CSV</button>
+    <button id="logSummary" style="float:right;"class="prBtn">Log Summary to Console</button>
   `;
   setTimeout(() => {
     const btn = section.querySelector("#logSummary");
